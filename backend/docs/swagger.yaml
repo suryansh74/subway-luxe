@@ -1,0 +1,104 @@
+basePath: /api
+definitions:
+  github_com_suryansh74_subway-luxe_internal_auth_domain.LoginInput:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+  github_com_suryansh74_subway-luxe_internal_auth_domain.RegisterInput:
+    properties:
+      email:
+        type: string
+      name:
+        maxLength: 50
+        minLength: 3
+        type: string
+      password:
+        type: string
+      password_confirm:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: Authorization header using JWT
+  title: Subway Luxe API
+  version: "1.0"
+paths:
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Login with email and password. Returns user info and sets session
+        cookie.
+      parameters:
+      - description: Login request
+        in: body
+        name: login
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_suryansh74_subway-luxe_internal_auth_domain.LoginInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "403":
+          description: Email or phone verification required
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: User login
+      tags:
+      - auth
+  /auth/register:
+    post:
+      consumes:
+      - application/json
+      description: Register a new user with name, email and password. An OTP will
+        be sent to email for verification.
+      parameters:
+      - description: Register request
+        in: body
+        name: register
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_suryansh74_subway-luxe_internal_auth_domain.RegisterInput'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "409":
+          description: Conflict
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Register new user
+      tags:
+      - auth
+security:
+- "": []
+swagger: "2.0"

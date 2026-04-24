@@ -6,7 +6,7 @@ import (
 
 	"github.com/aead/chacha20poly1305"
 	"github.com/o1egl/paseto"
-	"github.com/suryansh74/zomato/services/shared/models"
+	"github.com/suryansh74/subway-luxe/internal/shared/models"
 )
 
 type Maker interface {

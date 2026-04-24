@@ -4,7 +4,7 @@ import (
 	"errors"
 	"time"
 
-	"github.com/suryansh74/zomato/services/shared/models"
+	"github.com/suryansh74/subway-luxe/internal/shared/models"
 )
 
 var (
@@ -13,7 +13,7 @@ var (
 )
 
 type Payload struct {
-	User      *models.TokenUser `json:"user"` // ✅ now has role
+	User      *models.TokenUser `json:"user"`
 	IssuedAt  time.Time         `json:"issued_at"`
 	ExpiredAt time.Time         `json:"expired_at"`
 }
